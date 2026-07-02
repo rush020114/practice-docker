@@ -27,7 +27,7 @@ RUN pip install -r requirements.txt
 #           실제로 포트를 열어주는 건 아님
 #
 # 실제 포트 연결은
-# docker run -p 8000:8000 할 때 열림
+# 예) docker run -p 8000:8000 할 때 열림
 EXPOSE 8000
 # CMD → 컨테이너 실행될 때 자동으로 실행할 명령어
 #
