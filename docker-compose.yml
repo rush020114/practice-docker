@@ -7,4 +7,4 @@ services:      # 컨테이너들 정의
   fastapi:     
     build: ./fastapi  
     ports:
-      - "8000:8000"   
+      - "8000:8000"
