@@ -15,6 +15,10 @@ services:      # 컨테이너들 정의
 
   db:
     image: postgres # image를 커스터마이징할 필요가 없으므로 image 사용
+    networks:
+      mynetwork:
+        ipv4_address: 172.20.0.10  # 고정 IP
+
     expose: 
       - "5432"
     environment:
@@ -23,3 +27,9 @@ services:      # 컨테이너들 정의
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     restart: always
+
+networks:
+  mynetwork:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
