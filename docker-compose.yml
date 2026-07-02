@@ -3,8 +3,10 @@ services:      # 컨테이너들 정의
     build: ./nginx    # 이 폴더의 Dockerfile로 build
     ports:
       - "80:80"       # 포트 연결
+    restart: always
   
   fastapi:     
     build: ./fastapi  
     ports:
       - "8000:8000"
+    restart: always
