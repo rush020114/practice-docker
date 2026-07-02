@@ -7,6 +7,8 @@ services:      # 컨테이너들 정의
   
   fastapi:     
     build: ./fastapi  
+    networks: # db 통신용
+      - mynetwork
     expose: # 내부에서만 통신 (외부 노출 안 됨)
       - "8000"
     restart: always
@@ -15,8 +17,8 @@ services:      # 컨테이너들 정의
 
   db:
     image: postgres # image를 커스터마이징할 필요가 없으므로 image 사용
-    networks:
-      mynetwork:
+    networks: # 이 컨테이너가 사용할 네트워크 지정
+      mynetwork: # 아래에서 정의한 mynetwork에 연결
         ipv4_address: 172.20.0.10  # 고정 IP
 
     expose: 
@@ -28,8 +30,8 @@ services:      # 컨테이너들 정의
       POSTGRES_DB: ${POSTGRES_DB}
     restart: always
 
-networks:
-  mynetwork:
-    ipam:
+networks: # docker가 컨테이너끼리 통신할 네트워크 정의
+  mynetwork: # 네트워크 이름 (임의로 정한 것)
+    ipam: # IP 주소 관리 설정
       config:
-        - subnet: 172.20.0.0/16
+        - subnet: 172.20.0.0/16 # 이 네트워크에서 사용할 IP 대역
