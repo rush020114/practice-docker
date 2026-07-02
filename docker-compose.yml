@@ -1,6 +1,8 @@
 services:      # 컨테이너들 정의
   nginx:       # 컨테이너(service) 이름
     build: ./nginx    # 이 폴더의 Dockerfile로 build
+    networks: # fastapi 통신용
+      - mynetwork
     ports: # 외부에 포트 열어줌
       - "80:80"       # 포트 연결
     restart: always
@@ -11,6 +13,8 @@ services:      # 컨테이너들 정의
       - mynetwork
     expose: # 내부에서만 통신 (외부 노출 안 됨)
       - "8000"
+    env_file:        
+      - .env         # .env 파일 읽어오기
     restart: always
     depends_on: # 실행 순서
       - db # db 먼저 띄우고 fastapi 실행
